@@ -3,4 +3,15 @@ services:
   - docker
 
 script: 
-  - docker build -t react-app .
+  - docker build -t lslacker/react-example2 .
+  - docker images lslacker/react-example2
+
+before_deploy:
+  - docker login -u lslacker -p GFmt8dFR
+  - docker images lslacker/react-example2
+
+deploy:
+  provider: script
+  script: docker push lslacker/react-example2
+  on:
+    branch: master
